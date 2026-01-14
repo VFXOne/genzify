@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>GenZ Java</title>
+
+    <link rel="stylesheet" href="src/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <header>
+      <h1>💀 GenZ Java</h1>
+      <nav>
+        <button class="tab active" data-tab="playground">Playground</button>
+        <button class="tab" data-tab="about">About</button>
+      </nav>
+    </header>
+
+    <main>
+      <!-- PLAYGROUND -->
+      <section id="playground" class="tab-content active">
+        <div id="editor-input" class="editor"></div>
+
+        <div class="controls">
+          <button id="toJava">GenZ → Java</button>
+          <button id="toGenZ" class="secondary">Java → GenZ</button>
+        </div>
+
+        <div id="editor-output" class="editor"></div>
+      </section>
+
+      <!-- ABOUT -->
+      <section id="about" class="tab-content">
+        <h2>About</h2>
+        <p>
+          GenZ Java is a joke language that transpiles modern brainrot syntax
+          into valid Java.
+        </p>
+        <ul>
+          <li>✔ Safe keyword replacement</li>
+          <li>✔ No regex hacks</li>
+          <li>✔ Powered by a real lexer</li>
+          <li>✔ 100% cringe compliant</li>
+        </ul>
+      </section>
+    </main>
+
+    <script type="module">
+      import * as monaco from "https://unpkg.com/monaco-editor@0.45.0/esm/vs/editor/editor.api.js";
+
+      window.__monacoReady = Promise.resolve(monaco);
+    </script>
+
+    <script src="./src/index.ts"></script>
+  </body>
+</html>

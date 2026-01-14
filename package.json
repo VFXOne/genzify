@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "chevrotain": "^11.1.0",
+    "monaco-editor": "^0.55.1"
+  },
+  "devDependencies": {
+    "vite": "^7.3.1"
+  }
+}
