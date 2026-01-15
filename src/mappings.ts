@@ -1,14 +1,15 @@
 export const KEYWORD_MAP: Record<string, string> = {
-    true: "no_cap",
-    false: "cap",
+    no_cap: "true",
+    cap: "false",
     HotTake: "String",
-    float: "period",
-    boolean: "fax",
+    period: "float",
+    fax: "boolean",
     skibidi: "void",
     vibe_check: "if",
     big_yikes: "else",
     on_point: "=",
     ratios: ">",
+    smol: "<",
     fresh: "new",
     low_key: "private",
     high_key: "public",
@@ -20,7 +21,12 @@ export const KEYWORD_MAP: Record<string, string> = {
     cook: "class",
     chad: "interface",
     bestie: "extends",
+    simp: "implements",
     delulu: "abstract",
-    "@HitDifferent": "@Override",
+    cancel: "replace",
+    "@HitsDifferent": "@Override",
   };
   
+export const REVERSED_KEYWORD_MAP = Object.fromEntries(
+  Object.entries(KEYWORD_MAP).map(([key, value]) => [value, key])
+);

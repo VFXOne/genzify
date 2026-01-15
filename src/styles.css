@@ -1,40 +1,169 @@
-/* onglets */
+/* Réinitialisation et variables */
+:root {
+  --bg-dark: #0a0a0a;
+  --bg-panel: #121212;
+  --text-primary: #e0e0e0;
+  --text-muted: #888;
+  --accent: #ff6b6b;
+  --accent-hover: #ff8fab;
+  --border: #333;
+  --editor-bg: #1e1e1e;
+  --button-primary: linear-gradient(90deg, #ff6b6b, #ff8e8e);
+  --button-secondary: #3a3a3a;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+/* En-tête */
+header {
+  text-align: center;
+  padding: 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  background: linear-gradient(90deg, #ff6b6b, #a855f7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.emoji {
+  color: white;
+  margin-right: 10px;
+}
+
+/* Onglets */
 nav {
-    display: flex;
-    gap: 8px;
-    justify-content: center;
-    margin-top: 12px;
-  }
-  
-  .tab {
-    background: transparent;
-    border: none;
-    color: var(--muted);
-    font-weight: 600;
-    cursor: pointer;
-    padding: 6px 14px;
-    border-radius: 999px;
-  }
-  
-  .tab.active {
-    background: var(--accent);
-    color: white;
-  }
-  
-  .tab-content {
-    display: none;
-  }
-  
-  .tab-content.active {
-    display: block;
-  }
-  
-  /* Monaco editors */
-  .editor {
-    height: 240px;
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid var(--border);
-    background: var(--panel);
-  }
-  
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.tab {
+  background: var(--button-secondary);
+  color: var(--text-primary);
+  border: none;
+  padding: 8px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.tab:hover {
+  background: var(--border);
+}
+
+.tab.active {
+  background: var(--accent);
+  color: white;
+}
+
+/* Contenu des onglets */
+.tab-content {
+  display: none;
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* Éditeurs */
+.editor {
+  height: 300px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--editor-bg);
+  margin: 20px 0;
+  overflow: hidden;
+}
+
+/* Boutons d'action */
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#toJava {
+  background: var(--button-primary);
+  color: white;
+}
+
+#toJava:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+}
+
+#toGenZ {
+  background: var(--button-secondary);
+  color: var(--text-primary);
+}
+
+#toGenZ:hover {
+  background: var(--border);
+}
+
+/* Section "About" */
+#about {
+  text-align: center;
+}
+
+#about h2 {
+  color: var(--accent);
+  margin-bottom: 15px;
+}
+
+.post-image {
+  display: block;
+  max-width: 60%;
+  height: auto;
+  margin: 15px auto;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+#about ul {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+#about li {
+  margin: 10px 0;
+  padding-left: 20px;
+  position: relative;
+}
+
+#about li:before {
+  content: "✔";
+  color: var(--accent);
+  position: absolute;
+  left: 0;
+}

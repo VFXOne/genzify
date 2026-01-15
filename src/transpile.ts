@@ -1,9 +1,5 @@
 import { createToken, Lexer } from "chevrotain";
-import { KEYWORD_MAP } from "./mappings";
-
-const REVERSED_KEYWORD_MAP = Object.fromEntries(
-  Object.entries(KEYWORD_MAP).map(([key, value]) => [value, key])
-);
+import { KEYWORD_MAP, REVERSED_KEYWORD_MAP } from "./mappings";
 
 /* =========================
    TOKENS
