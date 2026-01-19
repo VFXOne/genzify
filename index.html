@@ -12,6 +12,47 @@
         --panel: #f5f5f5;
       }
 
+      /* Editors layout */
+      .editors-container {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        width: 100%;
+      }
+
+      .editor {
+        flex: 1;
+        min-height: 500px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+      }
+
+      .controls {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+        padding: 8px;
+      }
+
+      @media (min-width: 2000px) {
+        .editors-container {
+          flex-direction: row;
+          align-items: stretch;
+        }
+
+        .editor {
+          min-width: 0;
+          flex: 1;
+        }
+
+        .controls {
+          flex-direction: column;
+          min-width: 120px;
+          justify-content: center;
+        }
+      }
+
       /* Mappings table styles */
       .mappings-container {
         max-height: 60vh;
@@ -62,6 +103,7 @@
   <body>
     <header>
     <h1><span class="emoji">💀</span> GenZify Java <span class="emoji">💀</span></h1>
+    <h2 class="subtitle">Write brainrot, ship java</h2>
       <nav>
         <button class="tab active" data-tab="playground">Playground</button>
         <button class="tab" data-tab="mappings">Mappings</button>
@@ -71,14 +113,14 @@
 
     <main>
       <section id="playground" class="tab-content active">
-        <div id="editor-input" class="editor"></div>
+        <div class="editors-container">
+          <div id="editor-input" class="editor"></div>
 
-        <div class="controls">
-          <button id="toJava">To Java</button>
-          <button id="toGenZ" class="secondary">To GenZ</button>
+          <div id="conversion-controls" class="controls">
+          </div>
+
+          <div id="editor-output" class="editor"></div>
         </div>
-
-        <div id="editor-output" class="editor"></div>
       </section>
 
       <section id="mappings" class="tab-content">
@@ -125,6 +167,16 @@ Cut the bs bruh fr dis mad sus website just on another lvl no cap.
         </ul>
       </section>
     </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <div class="footer-content">
+        <span>Vibe coded with love by </span>
+        <a href="https://github.com/vfxone/genzify" target="_blank" class="github-link">
+          <i class="github-icon"></i> Calu
+        </a>
+      </div>
+    </footer>
 
     <!-- Template pour le code par défaut de l'éditeur -->
     <template id="default-genz-code">

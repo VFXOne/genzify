@@ -83,15 +83,85 @@ const outputEditor = monaco.editor.create(
     }
 );
 
-document.getElementById("toJava")!.onclick = () => {
-    outputEditor.setValue(transpileToJava(inputEditor.getValue()));
-};
+// Toggle pour choisir la direction de conversion
+const conversionControls = document.getElementById('conversion-controls');
+if (conversionControls) {
+    conversionControls.innerHTML = ''; // Nettoyer le conteneur
 
+    // Créer le conteneur principal
+    const toggleWrapper = document.createElement('div');
+    toggleWrapper.className = 'conversion-wrapper';
 
+    // Créer le label "Convert to"
+    const convertToLabel = document.createElement('div');
+    convertToLabel.className = 'convert-to-label';
+    convertToLabel.textContent = 'Convert to';
 
-document.getElementById("toGenZ")!.onclick = () => {
-    outputEditor.setValue(transpileToGenZ(inputEditor.getValue()));
-};
+    // Créer les labels de direction
+    const directionLabels = document.createElement('div');
+    directionLabels.className = 'direction-labels';
+
+    const javaLabel = document.createElement('span');
+    javaLabel.className = 'direction-label java-label';
+    javaLabel.textContent = 'Java';
+
+    const genZLabel = document.createElement('span');
+    genZLabel.className = 'direction-label genz-label';
+    genZLabel.textContent = 'GenZ';
+
+    directionLabels.appendChild(javaLabel);
+    directionLabels.appendChild(genZLabel);
+
+    // Créer le toggle
+    const toggleElement = document.createElement('div');
+    toggleElement.className = 'conversion-toggle';
+    toggleElement.innerHTML = `
+        <label>
+            <input type="checkbox" id="conversion-direction">
+            <span class="conversion-slider"></span>
+        </label>
+    `;
+
+    // Assembler le tout
+    toggleWrapper.appendChild(convertToLabel);
+    toggleWrapper.appendChild(directionLabels);
+    toggleWrapper.appendChild(toggleElement);
+    conversionControls.appendChild(toggleWrapper);
+}
+
+// État de la conversion
+let isConvertingToGenZ = false;
+
+// Fonction pour mettre à jour les languages des éditeurs
+function updateEditorLanguages() {
+    if (isConvertingToGenZ) {
+        // Quand on convertit vers GenZ, l'input est Java et l'output est GenZ
+        monaco.editor.setModelLanguage(inputEditor.getModel()!, "java");
+        monaco.editor.setModelLanguage(outputEditor.getModel()!, "genz-java");
+    } else {
+        // Quand on convertit vers Java, l'input est GenZ et l'output est Java
+        monaco.editor.setModelLanguage(inputEditor.getModel()!, "genz-java");
+        monaco.editor.setModelLanguage(outputEditor.getModel()!, "java");
+    }
+}
+
+// Fonction pour convertir le code avec throttling
+function convertCode() {
+    const code = inputEditor.getValue();
+    outputEditor.setValue(isConvertingToGenZ ? transpileToGenZ(code) : transpileToJava(code));
+}
+
+// Écouter les changements du toggle
+document.getElementById('conversion-direction')?.addEventListener('change', (e) => {
+    isConvertingToGenZ = (e.target as HTMLInputElement).checked;
+    updateEditorLanguages();
+    convertCode();
+});
+
+// Écouter les changements dans l'éditeur d'entrée
+inputEditor.onDidChangeModelContent(() => {
+    convertCode();
+});
 
 // Function to populate the mappings table
 function populateMappingsTable() {
@@ -138,3 +208,5 @@ document.querySelectorAll('.tab').forEach(tab => {
     }
   });
 });
+
+convertCode();
